@@ -1,0 +1,30 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+
+}
+
+[v-cloak]{
+  display: none;
+}
+
+#app{
+  padding: 20px;
+}
+
+.component{
+  padding: 20px;
+}
+
+h2{
+  margin-bottom: 20px;
+}
+
+input{
+  margin: 10px 0;
+  display: block;
+  padding: 5px;
+}

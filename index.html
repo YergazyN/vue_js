@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VueJS</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/ofd-ui.css">
+
+</head>
+<body>
+  <div uk-grid id="app" v-cloak>
+
+    <login-form />
+
+
+
+      <hr>
+
+      <button
+        class="uk-button uk-button-default"
+        @click="toggleBox">
+        Toggle Box
+      </button>
+
+      <div class="box one" v-if="isVisible"></div>
+  </div>
+
+  <!-- Vue JS -->
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script>
+    // vue init
+    let app = Vue.createApp({
+      data: function() {
+        return {
+          greeting: 'Hello Vue 3!',
+          isVisible: false
+        }
+      },
+
+      methods: {
+        toggleBox() {
+          this.isVisible = !this.isVisible
+        },
+        greet(greeting) {
+          console.log(greeting)
+        }
+      }
+    });
+
+    //app components
+    app.component('login-form', {
+      template: `
+        <div class="component">
+          <form @submit.prevent="handleSubmit">
+            <h2>{{title}}</h2>
+            <label for="">{{email_label}}</label>
+            <input type="email" v-model="email"/>
+            <label for="">{{password_label}}</label>
+            <input type="password" v-model="password"/>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      `,
+      data() {
+        return {
+          title: 'Login Form',
+          email_label: 'Email',
+          password_label: 'Password',
+          email: '',
+          password: ''
+        }
+      },
+
+      methods: {
+        handleSubmit() {
+          console.log(this.email, this.password)
+        }
+      }
+    })
+
+    //mount app to document
+    app.mount('#app');
+
+
+  </script>
+</body>
+</html>
