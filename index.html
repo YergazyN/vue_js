@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>VueJS</title>
+  <link rel="shortcut icon" type='image/x-icon' href="images/icons/favicon.ico"/>
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/ofd-ui.css">
 
@@ -58,8 +59,14 @@
         <div class="component">
           <form @submit.prevent="handleSubmit">
             <h2>{{title}}</h2>
-            <custom-input v-model="email" :label="email_label"/>
-            <custom-input v-model="password" :label="password_label"/>
+
+            <custom-input
+              v-for="(input, i) in inputs" :key="i"
+              v-model="input.value"
+              :label="input.label"
+              :type="input.type"
+            />
+
             <button type="submit">Submit</button>
           </form>
         </div>
@@ -68,16 +75,24 @@
       data() {
         return {
           title: 'Login Form',
-          email: '',
-          password: '',
-          email_label: 'Email',
-          password_label: 'Password'
+          inputs: [
+            {
+              label: 'Email',
+              value: '',
+              type: 'email'
+            },
+            {
+              label: 'Password',
+              value: '',
+              type: 'password'
+            }
+          ]
         }
       },
 
       methods: {
         handleSubmit() {
-          console.log(this.email, this.password)
+          console.log(this.inputs[0].value, this.inputs[1].value)
         }
       }
     })
@@ -86,10 +101,10 @@
       template: `
       <label>
         {{ label }}
-        <input type="text" v-model="inputValue">
+        <input type="type" v-model="inputValue">
       </label>
       `,
-      props: ['label', 'modelValue'],
+      props: ['label', 'type', 'modelValue'],
       computed: {
         inputValue: {
           get() {
